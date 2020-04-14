@@ -8,6 +8,18 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const logRequests = (request, response, next) => {
+  const { method, url } = request;
+
+  const logLabel = `[${method}] ${url}`;
+
+  console.log(logLabel);
+
+  return next();
+};
+
+// app.use(logRequests);
+
 const repositories = [];
 
 app.get("/repositories", (request, response) => {
